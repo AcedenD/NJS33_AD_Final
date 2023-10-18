@@ -17,6 +17,12 @@ export class BinhLuanController {
     return this.binhLuanService.findAll();
   }
 
+  @Get(':maCongViec')
+  findAllByCongViec(@Query('ma cong viec') id: number) {
+    return this.binhLuanService.findAllByCongViec(+id);
+  }
+
+
   @ApiBearerAuth()
   @UseGuards(AuthGuard("jwt"))
   @Post()

@@ -105,4 +105,26 @@ export class BinhLuanService {
     return `Không tìm thấy bình luận`;
 
   }
+
+  async findAllByCongViec(id: number) {
+
+    const congViec = await this.model.congViec.findFirst({
+      where: {
+        id: id
+      }
+    })
+
+
+
+    if (congViec) {
+      const binhLuan = await this.model.binhLuan.findMany({
+        where: {
+          ma_cong_viec: id
+        }
+      })
+      return binhLuan
+    }
+
+    return "Không tìm thấy công việc";
+  }
 }
