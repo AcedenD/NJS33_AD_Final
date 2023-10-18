@@ -46,7 +46,7 @@ export class AuthService {
       if (data.pass_word == password) {
         let token = this.jwtService.sign({ data: data }, { expiresIn: "7d", secret: "NODE" })
 
-        return token
+        return { message: "Đăng nhập thành công", token: token }
       } else {
         return "Sai mật khẩu"
       }
@@ -55,7 +55,7 @@ export class AuthService {
   }
 
   async signUp(createAuthDto: CreateAuthDto) {
-    let { email, pass_word, name, phone, birth_day } = createAuthDto;
+    let { email, pass_word, name, phone, birth_day, gender } = createAuthDto;
     let data = await this.model.nguoiDung.findFirst({
       where: {
         email,
@@ -71,7 +71,8 @@ export class AuthService {
           pass_word,
           name,
           phone,
-          birth_day
+          birth_day,
+          gender
         }
       })
       return "Đăng ký thành công"
