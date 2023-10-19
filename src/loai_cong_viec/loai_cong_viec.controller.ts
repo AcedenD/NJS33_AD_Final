@@ -9,25 +9,27 @@ import { ApiTags } from '@nestjs/swagger';
 export class LoaiCongViecController {
   constructor(private readonly loaiCongViecService: LoaiCongViecService) { }
 
+  @Get()
+  findAll() {
+    return this.loaiCongViecService.findAll();
+  }
+
   @Post()
   create(@Body() createLoaiCongViecDto: CreateLoaiCongViecDto) {
     return this.loaiCongViecService.create(createLoaiCongViecDto);
   }
 
-  @Get()
-  findAll() {
-    return this.loaiCongViecService.findAll();
-  }
+
 
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.loaiCongViecService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateLoaiCongViecDto: UpdateLoaiCongViecDto) {
-    return this.loaiCongViecService.update(+id, updateLoaiCongViecDto);
-  }
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateLoaiCongViecDto: UpdateLoaiCongViecDto) {
+  //   return this.loaiCongViecService.update(+id, updateLoaiCongViecDto);
+  // }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
