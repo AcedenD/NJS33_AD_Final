@@ -9,15 +9,18 @@ import { ApiTags } from '@nestjs/swagger';
 export class ChiTietLoaiCongViecController {
   constructor(private readonly chiTietLoaiCongViecService: ChiTietLoaiCongViecService) { }
 
-  @Post()
-  create(@Body() createChiTietLoaiCongViecDto: CreateChiTietLoaiCongViecDto) {
-    return this.chiTietLoaiCongViecService.create(createChiTietLoaiCongViecDto);
-  }
 
   @Get()
   findAll() {
     return this.chiTietLoaiCongViecService.findAll();
   }
+
+  @Post()
+  create(@Body() createChiTietLoaiCongViecDto: CreateChiTietLoaiCongViecDto) {
+    return this.chiTietLoaiCongViecService.create(createChiTietLoaiCongViecDto);
+  }
+
+
 
   @Get(':id')
   findOne(@Param('id') id: string) {
