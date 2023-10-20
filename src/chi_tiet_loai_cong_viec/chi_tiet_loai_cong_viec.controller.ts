@@ -1,9 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { ChiTietLoaiCongViecService } from './chi_tiet_loai_cong_viec.service';
 import { CreateChiTietLoaiCongViecDto } from './dto/create-chi_tiet_loai_cong_viec.dto';
 import { UpdateChiTietLoaiCongViecDto } from './dto/update-chi_tiet_loai_cong_viec.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 
+
+@ApiBearerAuth()
+@UseGuards(AuthGuard("jwt"))
 @ApiTags("ChiTietLoaiCongViec")
 @Controller('chi-tiet-loai-cong-viec')
 export class ChiTietLoaiCongViecController {
@@ -27,10 +31,12 @@ export class ChiTietLoaiCongViecController {
     return this.chiTietLoaiCongViecService.findOne(+id);
   }
 
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateChiTietLoaiCongViecDto: UpdateChiTietLoaiCongViecDto) {
     return this.chiTietLoaiCongViecService.update(+id, updateChiTietLoaiCongViecDto);
   }
+
 
   @Delete(':id')
   remove(@Param('id') id: string) {

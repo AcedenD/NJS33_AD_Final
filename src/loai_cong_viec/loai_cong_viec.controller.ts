@@ -1,9 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { LoaiCongViecService } from './loai_cong_viec.service';
 import { CreateLoaiCongViecDto } from './dto/create-loai_cong_viec.dto';
 import { UpdateLoaiCongViecDto } from './dto/update-loai_cong_viec.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 
+
+@ApiBearerAuth()
+@UseGuards(AuthGuard("jwt"))
 @ApiTags("LoaiCongViec")
 @Controller('loai-cong-viec')
 export class LoaiCongViecController {

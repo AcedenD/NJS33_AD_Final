@@ -51,11 +51,46 @@ export class ChiTietLoaiCongViecService {
     return "Không tìm thấy chi tiết loại công việc";
   }
 
-  update(id: number, updateChiTietLoaiCongViecDto: UpdateChiTietLoaiCongViecDto) {
-    return `This action updates a #${id} chiTietLoaiCongViec`;
+  async update(id: number, updateChiTietLoaiCongViecDto: UpdateChiTietLoaiCongViecDto) {
+    let { ten_chi_tiet } = updateChiTietLoaiCongViecDto
+
+    const chiTietLoaiCongViec = await this.model.chiTietLoaiCongViec.findUnique({
+      where: {
+        id
+      }
+    })
+
+    if (chiTietLoaiCongViec) {
+      return returnMessage("Cập nhật chi tiết loại công việc thành công", await this.model.chiTietLoaiCongViec.update({
+        where: {
+          id
+        },
+        data: {
+          ten_chi_tiet,
+        }
+      }))
+    }
+
+    return "Không tìm thấy chi tiết loại công việc";
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} chiTietLoaiCongViec`;
+  async remove(id: number) {
+    const chiTietLoaiCongViec = await this.model.chiTietLoaiCongViec.findUnique({
+      where: {
+        id
+      }
+    })
+
+    if (chiTietLoaiCongViec) {
+      return returnMessage("Xóa chi tiết loại công việc thành công", await this.model.chiTietLoaiCongViec.delete({
+        where: {
+          id
+        }
+      }));
+    }
+
+    return "Không tìm thấy chi tiết loại công việc";
+
+
   }
 }
