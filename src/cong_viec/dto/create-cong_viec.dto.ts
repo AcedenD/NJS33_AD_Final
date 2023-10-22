@@ -9,8 +9,7 @@ export class CreateCongViecDto {
   danhGia: number
   @ApiProperty()
   giaTien: number
-  @ApiProperty()
-  nguoiTao: number
+
   @ApiProperty()
   hinhAnh: string
   @ApiProperty()

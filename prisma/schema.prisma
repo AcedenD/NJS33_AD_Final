@@ -22,19 +22,20 @@ model BinhLuan {
 }
 
 model CongViec {
-  id               Int            @id @default(autoincrement())
-  ten_cong_viec    String?        @db.VarChar(200)
-  danh_gia         Int?
-  gia_tien         Int?
-  hinh_anh         String?        @db.VarChar(200)
-  mo_ta            String?        @db.VarChar(200)
-  mo_ta_ngan       String?        @db.VarChar(200)
-  sao_cong_viec    Int?
-  ma_chi_tiet_loai Int?
-  nguoi_tao        Int?
-  BinhLuan         BinhLuan[]
-  NguoiDung        NguoiDung?     @relation(fields: [nguoi_tao], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "CongViec_ibfk_2")
-  ThueCongViec     ThueCongViec[]
+  id                  Int                  @id @default(autoincrement())
+  ten_cong_viec       String?              @db.VarChar(200)
+  danh_gia            Int?
+  gia_tien            Int?
+  hinh_anh            String?              @db.VarChar(200)
+  mo_ta               String?              @db.VarChar(200)
+  mo_ta_ngan          String?              @db.VarChar(200)
+  sao_cong_viec       Int?
+  ma_chi_tiet_loai    Int?
+  nguoi_tao           Int?
+  BinhLuan            BinhLuan[]
+  ChiTietLoaiCongViec ChiTietLoaiCongViec? @relation(fields: [ma_chi_tiet_loai], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "CongViec_ibfk_1")
+  NguoiDung           NguoiDung?           @relation(fields: [nguoi_tao], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "CongViec_ibfk_2")
+  ThueCongViec        ThueCongViec[]
 
   @@index([ma_chi_tiet_loai], map: "ma_chi_tiet_loai")
   @@index([nguoi_tao], map: "nguoi_tao")
@@ -81,6 +82,7 @@ model ChiTietLoaiCongViec {
   hinh_anh          String?       @db.VarChar(200)
   ma_loai_cong_viec Int?
   LoaiCongViec      LoaiCongViec? @relation(fields: [ma_loai_cong_viec], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "ChiTietLoaiCongViec_ibfk_1")
+  CongViec          CongViec[]
 
   @@index([ma_loai_cong_viec], map: "ma_loai_cong_viec")
 }

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Req, Query } from '@nestjs/common';
 import { CongViecService } from './cong_viec.service';
 import { CreateCongViecDto } from './dto/create-cong_viec.dto';
 import { UpdateCongViecDto } from './dto/update-cong_viec.dto';
@@ -53,4 +53,28 @@ export class CongViecController {
     let user_id = nguoi_dung.id
     return this.congViecService.remove(+id, user_id);
   }
+
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard("jwt"))
+  @Post('lay-menu-loai-cong-viec')
+  layMenuLoaiCongViec() {
+    return this.congViecService.layMenuLoai();
+  }
+
+  @Get('lay-cong-viec-theo-chi-tiet/:MaChiTietLoai')
+  layCongViecTheoChiTiet(@Param('MaChiTietLoai') id: string) {
+    return this.congViecService.layCongViecTheoChiTiet(+id);
+  }
+
+  @Get('lay-cong-viec-chi-tiet/:MaCongViec')
+  layCongViecChiTiet(@Param('MaCongViec') id: string) {
+    return this.congViecService.layCongViecChiTiet(+id);
+  }
+
+  @Get('lay-danh-sach-cong-viec-theo-ten/:TenCongViec')
+  layCongViecTheoTen(@Param('TenCongViec') ten: string) {
+    return this.congViecService.layCongViecTheoTen(ten);
+  }
+
+
 }

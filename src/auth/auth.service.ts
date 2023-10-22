@@ -46,7 +46,7 @@ export class AuthService {
       if (data.pass_word == password) {
         let token = this.jwtService.sign({ data: data }, { expiresIn: "7d", secret: "NODE" })
 
-        return { message: "Đăng nhập thành công", token: token }
+        return { message: `Welcome, ${data.name}`, token: token }
       } else {
         return "Sai mật khẩu"
       }
