@@ -3,6 +3,7 @@ import { CreateCongViecDto } from './dto/create-cong_viec.dto';
 import { UpdateCongViecDto } from './dto/update-cong_viec.dto';
 import { PrismaClient } from '@prisma/client';
 import { returnMessage } from 'src/util/helper';
+import { unlinkSync } from 'fs';
 
 @Injectable()
 export class CongViecService {
@@ -129,6 +130,36 @@ export class CongViecService {
       return "Bạn không có quyền xóa công việc này"
     }
 
+    return "Không tìm thấy công việc";
+  }
+
+  async uploadHinhAnh(file, id: number, user_id: number) {
+    const congViec = await this.model.congViec.findFirst({
+      where: {
+        id
+      }
+    })
+
+    if (congViec) {
+      if (congViec.nguoi_tao == user_id) {
+        return returnMessage("Thêm ảnh công việc thành công", await this.model.congViec.update({
+          where: {
+            id
+          },
+          data: {
+            hinh_anh: file.path
+          }
+        }))
+
+      }
+
+      unlinkSync(file.path)
+
+      return "Bạn không có quyền cập nhật công việc này"
+
+    }
+
+    unlinkSync(file.path)
     return "Không tìm thấy công việc";
   }
 
