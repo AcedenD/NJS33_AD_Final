@@ -21,7 +21,7 @@ export class ChiTietLoaiCongViecService {
     })
 
     if (loaiCongViec) {
-      return returnMessage("Tạo chi tiết loại công việc thành công", await this.model.chiTietLoaiCongViec.create({
+      return returnMessage("Tạo chi tiết loại công việc thành công", 200, await this.model.chiTietLoaiCongViec.create({
         data: {
           ma_loai_cong_viec: ma_loai_cong_viec,
           ten_chi_tiet: ten_chi_tiet
@@ -61,7 +61,7 @@ export class ChiTietLoaiCongViecService {
     })
 
     if (chiTietLoaiCongViec) {
-      return returnMessage("Cập nhật chi tiết loại công việc thành công", await this.model.chiTietLoaiCongViec.update({
+      return returnMessage("Cập nhật chi tiết loại công việc thành công", 200, await this.model.chiTietLoaiCongViec.update({
         where: {
           id
         },
@@ -82,7 +82,7 @@ export class ChiTietLoaiCongViecService {
     })
 
     if (chiTietLoaiCongViec) {
-      return returnMessage("Xóa chi tiết loại công việc thành công", await this.model.chiTietLoaiCongViec.delete({
+      return returnMessage("Xóa chi tiết loại công việc thành công", 200, await this.model.chiTietLoaiCongViec.delete({
         where: {
           id
         }

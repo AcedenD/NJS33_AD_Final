@@ -15,7 +15,7 @@ export class LoaiCongViecService {
     let { tenLoaiCongViec } = createLoaiCongViecDto
 
 
-    return returnMessage("Tạo loại công việc thành công", await this.model.loaiCongViec.create({
+    return returnMessage("Tạo loại công việc thành công", 200, await this.model.loaiCongViec.create({
       data: {
         ten_loai_cong_viec: tenLoaiCongViec
       }
@@ -40,8 +40,25 @@ export class LoaiCongViecService {
     return "Không tìm thấy loại công việc";
   }
 
-  update(id: number, updateLoaiCongViecDto: UpdateLoaiCongViecDto) {
-    return `This action updates a #${id} loaiCongViec`;
+  async update(id: number, updateLoaiCongViecDto: UpdateLoaiCongViecDto) {
+    const loaiCongViec = await this.model.loaiCongViec.findUnique({
+      where: {
+        id
+      }
+    })
+
+    if (loaiCongViec) {
+      return returnMessage("Cập nhật loại công việc thành công", 200, await this.model.loaiCongViec.update({
+        where: {
+          id
+        },
+        data: {
+          ten_loai_cong_viec: updateLoaiCongViecDto.tenLoaiCongViec
+        }
+      }))
+    }
+
+    return "Không tìm thấy loại công việc";
   }
 
   async remove(id: number) {
@@ -52,7 +69,7 @@ export class LoaiCongViecService {
     })
 
     if (loaiCongViec) {
-      return returnMessage("Xóa loại công việc thành công", await this.model.loaiCongViec.delete({
+      return returnMessage("Xóa loại công việc thành công", 200, await this.model.loaiCongViec.delete({
         where: {
           id
         }

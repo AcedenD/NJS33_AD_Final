@@ -32,7 +32,7 @@ export class BinhLuanService {
         }
       })
 
-      return returnMessage("Thêm bình luận thành công", binhLuan)
+      return returnMessage("Thêm bình luận thành công", 200, binhLuan)
     }
 
     return "Không tìm thấy công việc";
@@ -67,7 +67,7 @@ export class BinhLuanService {
           }
         })
 
-        return returnMessage("Cập nhật bình luận thành công", updateBinhLuan)
+        return returnMessage("Cập nhật bình luận thành công", 200, updateBinhLuan)
       } else {
         return "Bạn kho được phép cập nhật bình luận này"
       }
@@ -95,7 +95,7 @@ export class BinhLuanService {
           }
         })
 
-        return returnMessage("Xóa bình luận thành công", deleteBinhLuan)
+        return returnMessage("Xóa bình luận thành công", 200, deleteBinhLuan)
       } else {
         return "Bạn kho được phép xóa bình luận này"
       }

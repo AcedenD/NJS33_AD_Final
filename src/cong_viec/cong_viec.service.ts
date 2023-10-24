@@ -38,8 +38,7 @@ export class CongViecService {
         }
       })
 
-      return returnMessage("Tạo công việc thành công", congViec)
-      // return chiTietLoaiCongViec
+      return returnMessage("Tạo công việc thành công", 200, congViec)
     }
 
     return "Không tìm thấy chi tiết loại công việc";
@@ -82,7 +81,7 @@ export class CongViecService {
     if (congViec) {
       if (chiTietLoaiCongViec) {
         if (congViec.nguoi_tao == user_id) {
-          return returnMessage("Cập nhật công việc thành công", await this.model.congViec.update({
+          return returnMessage("Cập nhật công việc thành công", 200, await this.model.congViec.update({
             where: {
               id
             },
@@ -120,7 +119,7 @@ export class CongViecService {
             ma_cong_viec: id
           }
         })
-        return returnMessage("Xóa công việc thành công", await this.model.congViec.delete({
+        return returnMessage("Xóa công việc thành công", 200, await this.model.congViec.delete({
           where: {
             id
           }
@@ -142,7 +141,7 @@ export class CongViecService {
 
     if (congViec) {
       if (congViec.nguoi_tao == user_id) {
-        return returnMessage("Thêm ảnh công việc thành công", await this.model.congViec.update({
+        return returnMessage("Thêm ảnh công việc thành công", 200, await this.model.congViec.update({
           where: {
             id
           },

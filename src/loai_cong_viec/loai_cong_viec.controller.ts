@@ -30,10 +30,10 @@ export class LoaiCongViecController {
     return this.loaiCongViecService.findOne(+id);
   }
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateLoaiCongViecDto: UpdateLoaiCongViecDto) {
-  //   return this.loaiCongViecService.update(+id, updateLoaiCongViecDto);
-  // }
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateLoaiCongViecDto: UpdateLoaiCongViecDto) {
+    return this.loaiCongViecService.update(+id, updateLoaiCongViecDto);
+  }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
