@@ -3,6 +3,7 @@ import { CreateChiTietLoaiCongViecDto } from './dto/create-chi_tiet_loai_cong_vi
 import { UpdateChiTietLoaiCongViecDto } from './dto/update-chi_tiet_loai_cong_viec.dto';
 import { PrismaClient } from '@prisma/client';
 import { returnMessage } from 'src/util/helper';
+import { unlinkSync } from 'fs';
 
 @Injectable()
 export class ChiTietLoaiCongViecService {
@@ -92,5 +93,29 @@ export class ChiTietLoaiCongViecService {
     return "Không tìm thấy chi tiết loại công việc";
 
 
+  }
+
+  async uploadHinhAnh(file, id: number, user_id: number) {
+    const chiTietLoaiCongViec = await this.model.chiTietLoaiCongViec.findFirst({
+      where: {
+        id
+      }
+    })
+
+    if (chiTietLoaiCongViec) {
+
+      return returnMessage("Thêm ảnh công việc thành công", 200, await this.model.chiTietLoaiCongViec.update({
+        where: {
+          id
+        },
+        data: {
+          hinh_anh: file.path
+        }
+      }))
+
+    }
+
+    unlinkSync(file.path)
+    return "Không tìm thấy công việc";
   }
 }

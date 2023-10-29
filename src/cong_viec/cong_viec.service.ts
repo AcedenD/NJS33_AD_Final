@@ -51,12 +51,14 @@ export class CongViecService {
 
   async findOne(cong_viec_id: number) {
     const congViec = await this.model.congViec.findFirst({
-
+      where: {
+        id: cong_viec_id
+      }
     })
 
     if (congViec) {
-      // return congViec
-      return "return from findOne"
+      return congViec
+
     }
 
     return "Không tìm thấy công việc";
