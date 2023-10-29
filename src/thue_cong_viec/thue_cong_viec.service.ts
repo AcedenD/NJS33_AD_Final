@@ -32,7 +32,7 @@ export class ThueCongViecService {
       return returnMessage("Thêm thuê công việc thành công", 200, thueCongViec)
     }
 
-    return 'This action adds a new thueCongViec';
+    return "Không tìm thấy công việc";
   }
 
   async findAll() {
@@ -67,6 +67,7 @@ export class ThueCongViecService {
           id
         },
         data: {
+          ma_cong_viec: maCongViec,
           ngay_thue: new Date(),
           hoan_thanh: hoanThanh
         }
